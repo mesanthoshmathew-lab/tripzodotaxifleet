@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TripZodo Fleet — Fleet Management System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+  <link rel="stylesheet" href="css/style.css?v=20260819-brand-theme">
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+</head>
+<body>
+
+  <!-- Login Screen -->
+  <div id="login-screen" class="login-screen">
+    <div class="login-card">
+      <div class="brand">
+        <img src="assets/logo.svg" alt="TripZodo Taxi Fleet" class="brand-logo">
+        <h1>TripZodo Fleet</h1>
+        <p class="brand-company">TripZodo Travel Ventures Pvt Ltd</p>
+        <p class="brand-tagline">Fleet Management System</p>
+      </div>
+      <form id="login-form">
+        <label>
+          Username
+          <input id="login-username" type="text" placeholder="admin" required autocomplete="username">
+        </label>
+        <label>
+          Password
+          <input id="login-password" type="password" placeholder="••••••••" required autocomplete="current-password">
+        </label>
+        <p id="login-error" class="error" role="alert"></p>
+        <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+      </form>
+      <p class="login-hint"> admin / admin123</p>
+    </div>
+  </div>
+
+  <!-- Main App -->
+  <div id="app-screen" class="app hidden">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-brand">
+        <img src="assets/logo.svg" alt="TripZodo" class="sidebar-logo">
+        <div>
+          <span class="sidebar-label">TripZodo Taxi Fleet</span>
+          <span class="sidebar-sub">Management</span>
+        </div>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="#" data-page="dashboard" class="active"><span class="nav-icon">📊</span> Dashboard</a>
+        <a href="#" data-page="vehicles"><span class="nav-icon">🚗</span> Vehicles</a>
+        <a href="#" data-page="drivers"><span class="nav-icon">👤</span> Drivers</a>
+        <a href="#" data-page="trips"><span class="nav-icon">🗺️</span> Trips</a>
+        <a href="#" data-page="gps"><span class="nav-icon">📍</span> Live GPS</a>
+        <a href="#" data-page="maintenance"><span class="nav-icon">🔧</span> Maintenance</a>
+        <a href="#" data-page="reports"><span class="nav-icon">📈</span> Reports</a>
+        <a href="#" data-page="settings"><span class="nav-icon">⚙️</span> Settings</a>
+        <a href="#" id="sidebar-logout" class="nav-logout"><span class="nav-icon">🚪</span> Logout</a>
+      </nav>
+      <div class="sidebar-footer">
+        <span id="user-name" class="user-name">Administrator</span>
+      </div>
+    </aside>
+
+    <div class="app-main">
+      <header class="app-header">
+        <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Toggle menu">☰</button>
+        <div class="header-titles">
+          <h1 class="header-title">TripZodo Fleet</h1>
+          <p class="header-subtitle">Fleet Management System</p>
+        </div>
+        <div class="header-actions">
+          <div class="gps-status" id="gps-status-indicator" title="GPS Status">
+            <span class="gps-dot"></span> GPS
+          </div>
+          <button class="btn-icon notification-btn" id="notification-btn" aria-label="Notifications">🔔</button>
+          <div class="header-profile">
+            <div class="profile-avatar">A</div>
+            <div>
+              <span id="header-user-name" class="profile-name">Administrator</span>
+              <span id="header-user-role" class="profile-role">Admin</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main class="main-content" id="main-content"></main>
+    </div>
+
+    <!-- Mobile bottom nav -->
+    <nav class="bottom-nav" id="bottom-nav">
+      <a href="#" data-page="dashboard" class="active"><span>📊</span><small>Home</small></a>
+      <a href="#" data-page="vehicles"><span>🚗</span><small>Vehicles</small></a>
+      <a href="#" data-page="trips"><span>🗺️</span><small>Trips</small></a>
+      <a href="#" data-page="gps"><span>📍</span><small>GPS</small></a>
+      <a href="#" data-page="more" id="more-nav"><span>⋯</span><small>More</small></a>
+    </nav>
+  </div>
+
+  <div id="toast-container" class="toast-container" aria-live="polite"></div>
+  <div id="modal-root"></div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/api.js?v=20260819-invoice-reporting"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/vehicles.js"></script>
+  <script src="js/drivers.js"></script>
+  <script src="js/trips.js?v=20260819-invoice-reporting"></script>
+  <script src="js/maintenance.js"></script>
+  <script src="js/gps.js"></script>
+  <script src="js/reports.js?v=20260819-full-doc"></script>
+  <script src="js/settings.js?v=20260819-logo-upload"></script>
+  <script src="js/app.js?v=20260819-income2"></script>
+</body>
+</html>

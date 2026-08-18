@@ -1,0 +1,13 @@
+{
+  "name": "tripzodo-fleet",
+  "version": "1.0.0",
+  "description": "TripZodo Fleet Management System",
+  "main": "backend/server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "dev": "node --watch backend/server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.0"
+  }
+}
